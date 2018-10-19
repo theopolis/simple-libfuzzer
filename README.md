@@ -14,7 +14,7 @@ Then to build, use the installed LLVM's clang
 
 ```
 mkdir macos_build; cd macos_build
-cmake -DCMAKE_CXX_COMPILER=/usr/local/Cellar/llvm/7.0.0/bin/clang++
+cmake -DCMAKE_CXX_COMPILER=/usr/local/Cellar/llvm/7.0.0/bin/clang++ ..
 make
 ```
 
@@ -30,7 +30,7 @@ Then to build use
 
 ```
 mkdir linux_build; cd linux_build
-cmake -DCMAKE_CXX_COMPILER=clang++
+cmake -DCMAKE_CXX_COMPILER=clang++ ..
 make
 ```
 
@@ -53,3 +53,13 @@ And it should be linked with the same flag:
 /usr/local/Cellar/llvm/7.0.0/bin/clang++   -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/simple_test.dir/main.cpp.o  -o simple_test -fsanitize=address libsimple.a -fsanitize=fuzzer -fsanitize=address
 ```
 
+## Run the harness
+
+```
+./simple_harness
+```
+
+Steps to demonstrate fuzzing
+- Look at `simple/simple.cpp` for `TODO[1]` and comment out the location where the exception does not pass through. Uncomment the section that drops the exception. The same applies to `TODO[2]`/
+- The `TODO[3]` will prevent the harness from hitting default RSS limits. This is a common problem with basic harnesses but the example here is contrived.
+- Look at `CMakeList.txt` and comment out the coverage lines. Do the same in `simple/simple.cpp` to challenge the harness to work harder to find a crash. Rebuild with `cmake` and `make` then `time ./simple_harness` and see the difference.
