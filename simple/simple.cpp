@@ -1,6 +1,7 @@
 // This is used as a test.
 
 #include <stdio.h>
+#include <cstring>
 #include <string>
 #include <vector>
 #include <sstream>
