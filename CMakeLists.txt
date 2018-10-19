@@ -34,4 +34,5 @@ add_executable(simple_harness
 target_link_libraries(simple_harness
   simple
   -fsanitize=fuzzer
+  -fuse-ld=lld
 )
