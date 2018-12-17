@@ -6,7 +6,6 @@ cmake_minimum_required(VERSION 3.6.0)
 
 add_compile_options(
   # TODO[4] Comment out these coverage options.
-  -fsanitize-coverage=trace-pc-guard
   -fsanitize-coverage=trace-cmp
   -fsanitize=fuzzer,address
   -std=c++14
